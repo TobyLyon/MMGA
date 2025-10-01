@@ -1,0 +1,8 @@
+/* Live overrides to ensure correct traits container position and behavior on the landing page */
+.traits-container {
+	margin-top: 80px;
+	max-height: 70vh;
+	overflow-y: auto;
+}
+
+

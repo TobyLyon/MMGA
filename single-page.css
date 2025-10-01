@@ -1,0 +1,625 @@
+/* ===== MOJO SINGLE PAGE LAYOUT ===== */
+
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* MOJO Colors */
+    --mojo-blue: #4A90E2;
+    --mojo-ice: #87CEEB;
+    --mojo-dark: #1a2332;
+    --mojo-darker: #0f1419;
+    --mojo-white: #ffffff;
+    --mojo-gray: #64748B;
+    --mojo-accent: #06B6D4;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-bg-dark: rgba(0, 0, 0, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(74, 144, 226, 0.2);
+    
+    /* Layout */
+    --header-height: 110px;
+    --snowflake-height: 200px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: url('BG.png') center/cover no-repeat fixed;
+    color: var(--mojo-white);
+    overflow-x: hidden;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+/* App Container */
+.app-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Header */
+.main-header {
+    height: var(--header-height);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px; /* slight vertical padding so content sits centered in taller header */
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(135, 206, 235, 0.3));
+}
+
+.title-img {
+    height: 40px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(135, 206, 235, 0.3));
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.social-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.social-btn img {
+    height: 32px;
+    width: auto;
+    border-radius: 4px;
+}
+
+.stats-mini {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--mojo-ice);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--mojo-gray);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: var(--snowflake-height);
+}
+
+.generator-section {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Canvas Container */
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.canvas-header {
+    text-align: center;
+}
+
+.gallery-title {
+    height: 60px;
+    width: auto;
+    filter: drop-shadow(0 2px 8px rgba(135, 206, 235, 0.3));
+}
+
+.canvas-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--glass-bg-dark);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 20px;
+}
+
+.canvas-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, var(--mojo-ice), var(--mojo-blue), var(--mojo-accent));
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.3;
+    animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+}
+
+#pfpCanvas {
+    border-radius: 15px;
+    background: #000;
+    display: block;
+}
+
+.canvas-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Improve visibility of the Download button inside canvas actions */
+.canvas-actions .btn.btn-secondary {
+    background: rgba(10, 23, 35, 0.9);
+    color: #ffffff;
+    border: 1px solid rgba(135, 206, 235, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.canvas-actions .btn.btn-secondary:hover {
+    background: rgba(20, 40, 60, 0.95);
+    border-color: rgba(135, 206, 235, 0.9);
+}
+
+.price-display {
+    text-align: center;
+    padding: 15px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.price-amount {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--mojo-ice);
+    margin-bottom: 5px;
+}
+
+.price-usd {
+    font-size: 14px;
+    color: var(--mojo-gray);
+}
+
+/* Traits Container */
+.traits-container {
+    background: var(--glass-bg-dark);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: var(--glass-shadow);
+    height: fit-content;
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-top: 80px; /* Align with top of canvas wrapper (60px gallery title + 20px gap) */
+}
+
+.traits-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.traits-header h2 {
+    color: var(--mojo-ice);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.traits-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Active tab style for sticker packs */
+.trait-section button.active {
+    outline: 2px solid rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.12);
+}
+
+.trait-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trait-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--mojo-ice);
+    font-weight: 600;
+}
+
+.trait-icon {
+    font-size: 18px;
+}
+
+.trait-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+    min-height: 80px;
+    border: 2px solid rgba(135, 206, 235, 0.5);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Trait Option Items */
+.trait-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 11px;
+    color: var(--mojo-white);
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trait-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+    margin: 2px auto 4px auto;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+}
+
+.trait-card:hover {
+    background: rgba(135, 206, 235, 0.2);
+    border-color: var(--mojo-ice);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(135, 206, 235, 0.3);
+}
+
+.trait-card.selected {
+    background: var(--mojo-ice);
+    color: var(--mojo-dark);
+    border-color: var(--mojo-ice);
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.5);
+}
+
+.trait-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.trait-emoji {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.trait-name {
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 10px;
+}
+
+.trait-price {
+    font-size: 9px;
+    opacity: 0.8;
+    color: var(--mojo-ice);
+}
+
+/* Large MOJO Logo positioned under traits container */
+.large-logo-positioned {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: -8px 0 0 0; /* bump slightly upward */
+}
+
+.large-mojo-logo {
+    width: 300px;
+    height: auto;
+    filter: drop-shadow(0 4px 12px rgba(135, 206, 235, 0.4));
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.large-mojo-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 16px rgba(135, 206, 235, 0.6));
+    opacity: 1;
+}
+
+/* About Section */
+.about-section {
+    padding: 20px;
+    text-align: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--glass-border);
+}
+
+.about-image {
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+/* Snowflake Animation */
+.snowflake-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--snowflake-height);
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+}
+
+.snowflake-strip {
+    position: absolute;
+    height: 200px;
+    width: auto;
+    min-width: 100vw;
+    opacity: 0.9;
+    animation: snowflake-scroll 25s linear infinite;
+    object-fit: cover;
+    object-position: center;
+}
+
+.snowflake-strip:nth-child(1) {
+    animation-delay: 0s;
+    left: 0;
+}
+
+.snowflake-strip:nth-child(2) {
+    animation-delay: -8.33s;
+    left: 0;
+}
+
+.snowflake-strip:nth-child(3) {
+    animation-delay: -16.66s;
+    left: 0;
+}
+
+@keyframes snowflake-scroll {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--mojo-ice), var(--mojo-blue));
+    color: var(--mojo-dark);
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(135, 206, 235, 0.6);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--mojo-white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--mojo-ice);
+    border: 1px solid var(--mojo-ice);
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+.btn-ghost:hover {
+    background: var(--mojo-ice);
+    color: var(--mojo-dark);
+}
+
+
+/* Wallet button - blue, more compact, keep inner content size */
+/* Removed wallet-specific button styles in Web2-only build */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .generator-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .header-content {
+        padding: 0 15px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .header-actions {
+        gap: 15px;
+    }
+    
+    .social-links {
+        gap: 8px;
+    }
+    
+    .social-btn img {
+        height: 28px;
+    }
+    
+    .traits-container {
+        max-height: none;
+        order: 2;
+    }
+    
+    .canvas-container {
+        order: 1;
+    }
+    
+    .trait-options {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    }
+    
+    .main-content {
+        padding: 15px;
+        margin-bottom: 80px;
+    }
+    
+    :root {
+        --snowflake-height: 150px;
+    }
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: var(--mojo-white);
+    box-shadow: var(--glass-shadow);
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+/* Scrollbar Styling */
+.traits-container::-webkit-scrollbar,
+.trait-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.traits-container::-webkit-scrollbar-track,
+.trait-options::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.traits-container::-webkit-scrollbar-thumb,
+.trait-options::-webkit-scrollbar-thumb {
+    background: var(--mojo-ice);
+    border-radius: 3px;
+}
+
+.traits-container::-webkit-scrollbar-thumb:hover,
+.trait-options::-webkit-scrollbar-thumb:hover {
+    background: var(--mojo-blue);
+}
+
+/* Removed wallet modal styles in Web2-only build */

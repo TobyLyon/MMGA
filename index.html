@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PFP Generator - Make Memes Great Again</title>
+  <link rel="icon" type="image/jpeg" href="img/branding/favicon.jpg">
+  <link rel="apple-touch-icon" href="img/branding/favicon.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="mmga-redesign.css?v=1" />
+</head>
+<body>
+  
+  <!-- Header Navigation -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <img src="img/branding/maga-hat.png" alt="Logo" class="logo-hat" />
+        <div class="logo-text">
+          <h1>PFP<br/>GENERATOR</h1>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <button class="copy-token-btn" id="copyTokenBtn" title="Copy Token Address: 87B6mb9KBjaF5NHrB3H33f7grdUHi4oWmMErjhZ5bonk">
+          <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span class="token-text">...jhZ5bonk</span>
+        </button>
+        <a href="https://x.com/mojodotfun" target="_blank" rel="noopener noreferrer" class="social-link" title="Follow on X">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+        <a href="https://dexscreener.com/solana/79zkjctkyy6gt92v2yfv9bzr7ehwh2yxfpkskpass24u" target="_blank" rel="noopener noreferrer" class="social-link" title="View on DexScreener">
+          <img src="img/branding/dexscreener.png" alt="DexScreener" class="social-icon" />
+        </a>
+        <button class="btn-action" id="newProjectBtn">New Project</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2 class="hero-title">CREATE YOUR PERFECT PFP</h2>
+      <p class="hero-subtitle">Transform your profile picture with style</p>
+      <label for="photoInput" class="btn-hero">
+        UPLOAD YOUR PHOTO
+      </label>
+      <input type="file" id="photoInput" accept="image/png, image/jpeg, image/jpg, image/webp, image/heic, image/heif" style="position:absolute; left:-9999px;" />
+    </div>
+  </section>
+
+  <!-- Editor Section -->
+  <main class="editor-main">
+    <div class="editor-container">
+      
+      <!-- Left: Canvas & Controls -->
+      <div class="canvas-section">
+        
+        <!-- Transform Toolbar -->
+        <div class="toolbar">
+          <div class="toolbar-group">
+            <button class="btn-tool" id="bringForwardBtn" title="Bring Forward">↑ Layer</button>
+            <button class="btn-tool" id="sendBackwardBtn" title="Send Backward">↓ Layer</button>
+          </div>
+          <div class="toolbar-group">
+            <button class="btn-tool" id="flipHBtn" title="Flip Horizontal">⇄ Flip H</button>
+            <button class="btn-tool" id="flipVBtn" title="Flip Vertical">⇅ Flip V</button>
+          </div>
+          <div class="toolbar-group">
+            <label class="toolbar-label">Opacity:</label>
+            <input type="range" id="opacityRange" min="0" max="1" step="0.01" value="1" class="range-slider" />
+          </div>
+          <div class="toolbar-group">
+            <select id="blendModeSelect" class="select-tool">
+              <option value="source-over">Normal</option>
+              <option value="multiply">Multiply</option>
+              <option value="screen">Screen</option>
+            </select>
+          </div>
+          <div class="toolbar-group">
+            <button class="btn-tool btn-danger" id="deleteBtn" title="Delete">🗑️ Delete</button>
+          </div>
+          <div class="toolbar-spacer"></div>
+          <button class="btn-export" id="exportBtn">
+            <span>⬇️</span> EXPORT
+          </button>
+        </div>
+
+        <!-- Canvas -->
+        <div class="canvas-wrapper">
+          <canvas id="editorCanvas" width="600" height="600"></canvas>
+          <div class="canvas-instructions" id="canvasInstructions">
+            <div class="instructions-icon">👆</div>
+            <p>Upload a photo to get started</p>
+          </div>
+        </div>
+
+        <!-- View Controls -->
+        <div class="view-controls">
+          <button class="btn-view" id="fitBtn">Fit</button>
+          <button class="btn-view" id="oneToOneBtn">1:1</button>
+          <button class="btn-view" id="zoomInBtn">+</button>
+          <button class="btn-view" id="zoomOutBtn">−</button>
+          <div class="control-spacer"></div>
+          <button class="btn-view" id="saveSessionBtn">💾 Save</button>
+          <button class="btn-view" id="resetBtn">🔄 Reset</button>
+        </div>
+
+      </div>
+
+      <!-- Right: Sticker Library -->
+      <aside class="sticker-library">
+        <div class="library-header">
+          <h3>🎨 STICKER LIBRARY</h3>
+          <input type="search" id="stickerSearch" placeholder="Search stickers..." class="search-input" />
+        </div>
+
+        <!-- Pack Tabs -->
+        <div class="pack-tabs" id="stickerTabs" role="tablist"></div>
+
+        <!-- Sticker Grid -->
+        <div class="sticker-grid" id="stickerGrid"></div>
+
+        <div class="library-footer">
+          <p class="footer-hint">💡 Click or drag stickers onto your photo</p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-banner">
+      <img src="img/branding/footer-banner.jpg" alt="Footer Banner" class="footer-img" />
+      <div class="footer-overlay">
+        <p>PFP Generator</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast -->
+  <div id="notification" class="notification" role="alert" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="editor.js?v=2"></script>
+</body>
+</html>

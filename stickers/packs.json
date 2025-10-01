@@ -1,0 +1,31 @@
+{
+  "packs": [
+    {
+      "id": "mmga",
+      "name": "Stickers",
+      "items": [
+        { 
+          "id": "Hat", 
+          "src": "img/branding/maga-hat.png", 
+          "thumb": "img/branding/maga-hat.png", 
+          "defaultScale": 0.35, 
+          "allowTint": false 
+        },
+        { 
+          "id": "Text 1", 
+          "src": "img/branding/mmga-text-1.png", 
+          "thumb": "img/branding/mmga-text-1.png", 
+          "defaultScale": 0.5, 
+          "allowTint": false 
+        },
+        { 
+          "id": "Text 2", 
+          "src": "img/branding/mmga-text-2.png", 
+          "thumb": "img/branding/mmga-text-2.png", 
+          "defaultScale": 0.5, 
+          "allowTint": false 
+        }
+      ]
+    }
+  ]
+}

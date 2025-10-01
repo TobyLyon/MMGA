@@ -1,0 +1,68 @@
+/* MMGA Theme Overrides - patriotic red/white/blue with bold campaign styling */
+
+:root {
+	--mmga-red: #C8102E;
+	--mmga-blue: #0A3161;
+	--mmga-white: #ffffff;
+	--mmga-gold: #f2c94c;
+}
+
+body {
+	background: radial-gradient(1200px 800px at 50% 20%, rgba(10, 49, 97, 0.6), rgba(10, 49, 97, 0.9)), url('BG.png') center/cover fixed no-repeat;
+}
+
+.main-header {
+	background: rgba(10, 49, 97, 0.6);
+	border-bottom: 2px solid rgba(200, 16, 46, 0.45);
+}
+
+.brand-section span:last-child {
+	color: var(--mmga-white);
+	letter-spacing: 0.5px;
+}
+
+.btn-primary {
+	background: linear-gradient(135deg, var(--mmga-red), #e01b3b);
+	color: var(--mmga-white);
+	border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-secondary {
+	background: rgba(255,255,255,0.08);
+	border: 1px solid rgba(255,255,255,0.25);
+}
+
+.btn-ghost {
+	color: var(--mmga-white);
+	border-color: var(--mmga-white);
+}
+
+.canvas-wrapper {
+	border-color: rgba(200, 16, 46, 0.4);
+}
+
+.canvas-glow {
+	background: linear-gradient(45deg, var(--mmga-blue), var(--mmga-red), var(--mmga-gold));
+}
+
+.traits-container {
+	border-color: rgba(255,255,255,0.2);
+}
+
+.trait-card.selected {
+	background: var(--mmga-red);
+	color: var(--mmga-white);
+}
+
+.transform-toolbar .btn {
+	border-color: rgba(255,255,255,0.25);
+}
+
+.notification.success {
+	background: linear-gradient(135deg, #1e824c, #2ecc71);
+}
+
+.notification.error {
+	background: linear-gradient(135deg, #c0392b, #e74c3c);
+}
+
