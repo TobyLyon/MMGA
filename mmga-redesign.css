@@ -178,105 +178,180 @@ body {
     object-fit: contain;
 }
 
-/* === HERO BANNER === */
-.hero-banner {
+/* === FULLSCREEN LANDING HERO === */
+.landing-hero {
     position: relative;
-    background: linear-gradient(135deg, var(--maga-red) 0%, var(--maga-red-dark) 50%, var(--maga-blue) 100%);
-    padding: var(--spacing-xl) var(--spacing-lg);
-    text-align: center;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
-    min-height: auto;
 }
 
-.hero-banner::before {
-    content: '';
+.hero-image-wrapper {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 20px,
-            rgba(255, 255, 255, 0.03) 20px,
-            rgba(255, 255, 255, 0.03) 40px
-        );
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
     pointer-events: none;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    margin: 0 auto;
+/* === HAT RAIN EFFECT === */
+.hat-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
 }
 
-.hero-title {
+.hat {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('img/branding/maga-hat.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        top: -50px;
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        top: 100vh;
+        opacity: 0;
+    }
+}
+
+/* === FLOATING ACTIONS === */
+.floating-actions {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.floating-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: var(--maga-white);
+    transition: all 0.3s ease;
+}
+
+.floating-social:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.floating-social .social-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.floating-token {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--maga-white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.floating-token:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.token-address {
+    letter-spacing: 0.5px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* === SECTION TITLES (for generator) === */
+.section-title {
     font-family: var(--font-display);
     font-weight: 900;
     font-size: 2.5rem;
     color: var(--maga-white);
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
     letter-spacing: 2px;
-    margin-bottom: var(--spacing-md);
-    animation: heroGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes heroGlow {
-    0% { text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); }
-    100% { text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.5); }
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--maga-white);
-    opacity: 0.95;
-    margin-bottom: var(--spacing-xl);
-    font-weight: 600;
-}
-
-.btn-hero {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    background: var(--maga-white);
-    color: var(--maga-blue);
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1rem;
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    box-shadow: var(--shadow-md);
-    transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.btn-hero:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-    background: var(--maga-gold);
+.section-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    font-weight: 600;
 }
 
 /* === EDITOR MAIN === */
 .editor-main {
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: 80px var(--spacing-lg);
     max-width: 1600px;
     margin: 0 auto;
+    scroll-margin-top: 80px;
 }
 
 .editor-container {
@@ -678,47 +753,22 @@ body {
     background: var(--maga-blue-dark);
     border-top: 3px solid var(--maga-red);
     margin-top: var(--spacing-2xl);
-    overflow: hidden;
 }
 
-.footer-banner {
-    position: relative;
-    width: 100%;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
 }
 
-.footer-img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center;
-}
-
-.footer-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.footer-overlay p {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: var(--maga-white);
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-    letter-spacing: 1px;
+.legal {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    opacity: 0.9;
 }
 
 /* === NOTIFICATION === */
@@ -755,12 +805,21 @@ body {
         top: 0;
     }
     
-    .hero-title {
+    .section-title {
         font-size: 2rem;
     }
     
     .toolbar {
         flex-wrap: wrap;
+    }
+    
+    .scroll-to-generator {
+        font-size: 1.125rem;
+        padding: 18px 36px;
+    }
+    
+    .token-address {
+        max-width: 150px;
     }
 }
 
@@ -774,12 +833,16 @@ body {
         font-size: 1.25rem;
     }
     
-    .hero-title {
+    .section-title {
         font-size: 1.75rem;
     }
     
-    .hero-subtitle {
+    .section-subtitle {
         font-size: 1rem;
+    }
+    
+    .editor-main {
+        padding: 60px var(--spacing-md);
     }
     
     .sticker-grid {
@@ -788,6 +851,23 @@ body {
     
     .canvas-wrapper {
         min-height: 400px;
+    }
+    
+    .floating-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-md);
+        bottom: 100px;
+    }
+    
+    .token-address {
+        max-width: 120px;
+        font-size: 0.75rem;
+    }
+    
+    .hat {
+        width: 30px;
+        height: 30px;
     }
 }
 

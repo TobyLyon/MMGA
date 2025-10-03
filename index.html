@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PFP Generator - Make Memes Great Again</title>
+  <title>Make Memes Great Again - PFP Generator</title>
   <link rel="icon" type="image/jpeg" href="img/branding/favicon.jpg">
   <link rel="apple-touch-icon" href="img/branding/favicon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
       <div class="logo-section">
         <img src="img/branding/maga-hat.png" alt="Logo" class="logo-hat" />
         <div class="logo-text">
-          <h1>PFP<br/>GENERATOR</h1>
+          <h1>MAKE MEMES<br/>GREAT AGAIN</h1>
         </div>
       </div>
       <nav class="header-nav">
@@ -43,21 +43,40 @@
     </div>
   </header>
 
-  <!-- Hero Banner -->
-  <section class="hero-banner">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h2 class="hero-title">CREATE YOUR PERFECT PFP</h2>
-      <p class="hero-subtitle">Transform your profile picture with style</p>
-      <label for="photoInput" class="btn-hero">
-        UPLOAD YOUR PHOTO
-      </label>
-      <input type="file" id="photoInput" accept="image/png, image/jpeg, image/jpg, image/webp, image/heic, image/heif" style="position:absolute; left:-9999px;" />
+  <!-- Fullscreen Landing Hero -->
+  <section class="landing-hero">
+    <div class="hero-image-wrapper">
+      <img src="salute.jpg" alt="Make Memes Great Again" class="hero-image" />
+      <div class="hero-overlay"></div>
+    </div>
+    
+    <!-- Hat Rain Effect -->
+    <div class="hat-rain" id="hatRain"></div>
+    
+    <!-- Floating Social Actions -->
+    <div class="floating-actions">
+      <a href="https://x.com/mojodotfun" target="_blank" rel="noopener noreferrer" class="floating-social" title="Follow on X">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://dexscreener.com/solana/79zkjctkyy6gt92v2yfv9bzr7ehwh2yxfpkskpass24u" target="_blank" rel="noopener noreferrer" class="floating-social" title="View on DexScreener">
+        <img src="img/branding/dexscreener.png" alt="DexScreener" class="social-icon" />
+      </a>
+      <button class="floating-token" id="floatingTokenBtn" title="Copy Token Address">
+        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span class="token-address">87B6mb9KBjaF5NHrB3H33f7grdUHi4oWmMErjhZ5bonk</span>
+      </button>
     </div>
   </section>
 
   <!-- Editor Section -->
-  <main class="editor-main">
+  <main class="editor-main" id="generator">
+    <h2 class="section-title">PFP GENERATOR</h2>
+    <p class="section-subtitle">Upload your photo and start customizing with our powerful editor</p>
     <div class="editor-container">
       
       <!-- Left: Canvas & Controls -->
@@ -138,11 +157,8 @@
 
   <!-- Footer -->
   <footer class="main-footer">
-    <div class="footer-banner">
-      <img src="img/branding/footer-banner.jpg" alt="Footer Banner" class="footer-img" />
-      <div class="footer-overlay">
-        <p>PFP Generator</p>
-      </div>
+    <div class="footer-content" role="contentinfo">
+      <p class="legal">© 2025 Make Memes Great Again. All rights reserved. All trademarks and registered trademarks are the property of their respective owners.</p>
     </div>
   </footer>
 

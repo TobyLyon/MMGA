@@ -45,6 +45,7 @@
 	const stickerSearch = document.getElementById('stickerSearch');
 	const stickerTabs = document.getElementById('stickerTabs');
 	const stickerGrid = document.getElementById('stickerGrid');
+	const floatingTokenBtn = document.getElementById('floatingTokenBtn');
 
 	/** Utility Functions **/
 	function showNotification(message, type = 'info') {
@@ -800,6 +801,7 @@
 	function wireUI() {
 		const copyTokenBtn = document.getElementById('copyTokenBtn');
 		copyTokenBtn?.addEventListener('click', copyTokenAddress);
+		floatingTokenBtn?.addEventListener('click', copyTokenAddress);
 
 		photoInput?.addEventListener('change', async (e) => {
 			const file = e.target.files && e.target.files[0];
@@ -845,6 +847,60 @@
 		wireUI();
 		await loadStickerPacks();
 		await loadSessionIfAny();
+		initHatRain();
+	});
+
+	/** Hat Rain Effect **/
+	function initHatRain() {
+		const hatRainContainer = document.getElementById('hatRain');
+		if (!hatRainContainer) return;
+
+		const numHats = 15; // Number of falling hats
+		
+		for (let i = 0; i < numHats; i++) {
+			createFallingHat(hatRainContainer, i);
+		}
+	}
+
+	function createFallingHat(container, index) {
+		const hat = document.createElement('div');
+		hat.className = 'hat';
+		
+		// Random horizontal position
+		const leftPos = Math.random() * 100;
+		hat.style.left = leftPos + '%';
+		
+		// Random animation duration (speed)
+		const duration = 8 + Math.random() * 12; // 8-20 seconds
+		hat.style.animationDuration = duration + 's';
+		
+		// Random delay to stagger the hats
+		const delay = Math.random() * 10;
+		hat.style.animationDelay = delay + 's';
+		
+		// Random size variation
+		const size = 30 + Math.random() * 30; // 30-60px
+		hat.style.width = size + 'px';
+		hat.style.height = size + 'px';
+		
+		container.appendChild(hat);
+	}
+
+	// Fade out hat rain on scroll
+	window.addEventListener('scroll', () => {
+		const hatRainContainer = document.getElementById('hatRain');
+		if (!hatRainContainer) return;
+		
+		const scrollY = window.scrollY;
+		const windowHeight = window.innerHeight;
+		
+		// Fade out as user scrolls down
+		if (scrollY < windowHeight) {
+			const opacity = Math.max(0, 1 - (scrollY / windowHeight) * 1.5);
+			hatRainContainer.style.opacity = opacity;
+		} else {
+			hatRainContainer.style.opacity = 0;
+		}
 	});
 })();
 
