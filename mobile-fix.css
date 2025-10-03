@@ -331,43 +331,146 @@
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
+        max-width: 100% !important;
         gap: var(--space-md) !important;
+        overflow-x: hidden !important;
+        margin: 0 !important;
+        padding: var(--space-sm) !important;
+        box-sizing: border-box !important;
     }
     
     .generator-content {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
+        max-width: 100% !important;
         gap: var(--space-md) !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
     }
     
     .preview-section {
         order: 1 !important;
         width: 100% !important;
+        max-width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
+        padding: var(--space-sm) !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        border-left: none !important;
     }
     
     .menu-section-compact {
         order: 2 !important;
         width: 100% !important;
+        max-width: 100% !important;
         max-height: none !important;
+        box-sizing: border-box !important;
     }
     
     .canvas-container {
         width: 100% !important;
-        max-width: 320px !important;
+        max-width: 100% !important;
         margin: 0 auto !important;
         display: flex !important;
         justify-content: center !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
     }
     
     #pfpCanvas {
-        width: 280px !important;
-        height: 280px !important;
+        width: min(280px, 90vw) !important;
+        height: min(280px, 90vw) !important;
         max-width: 280px !important;
         max-height: 280px !important;
+    }
+    
+    /* Fix editor main container */
+    .editor-main {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: var(--space-lg) var(--space-sm) !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix editor container */
+    .editor-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: var(--space-md) !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix canvas section */
+    .canvas-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: var(--space-sm) !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Fix sticker library */
+    .sticker-library {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* ===== FIX LANDING PAGE FLOATING ACTIONS ===== */
+    .floating-actions {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: var(--spacing-xs) !important;
+        padding: 8px 12px !important;
+        bottom: 100px !important;
+        max-width: 95vw !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .floating-social {
+        width: 36px !important;
+        height: 36px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .floating-social .social-icon {
+        width: 18px !important;
+        height: 18px !important;
+    }
+    
+    .floating-social svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+    
+    .floating-token {
+        padding: 6px 12px !important;
+        font-size: 0.7rem !important;
+        max-width: 100% !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+    
+    .floating-token .copy-icon {
+        width: 14px !important;
+        height: 14px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .token-address {
+        max-width: 140px !important;
+        font-size: 0.65rem !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
     }
     
     /* ===== FIX GAME CONTAINER MOBILE ===== */
@@ -498,6 +601,45 @@
     }
 }
 
+/* ===== MEDIUM MOBILE (640px and below) - Override mmga-redesign.css ===== */
+@media (max-width: 640px) {
+    /* More aggressive landing page fixes */
+    .floating-actions {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 8px 12px !important;
+        bottom: 90px !important;
+        max-width: 92vw !important;
+    }
+    
+    .floating-social {
+        width: 34px !important;
+        height: 34px !important;
+    }
+    
+    .floating-social .social-icon,
+    .floating-social svg {
+        width: 17px !important;
+        height: 17px !important;
+    }
+    
+    .floating-token {
+        padding: 6px 12px !important;
+        font-size: 0.68rem !important;
+    }
+    
+    .floating-token .copy-icon {
+        width: 13px !important;
+        height: 13px !important;
+    }
+    
+    .token-address {
+        max-width: 130px !important;
+        font-size: 0.62rem !important;
+    }
+}
+
 /* ===== EXTRA SMALL MOBILE (480px and below) ===== */
 @media (max-width: 480px) {
     .restaurant-container {
@@ -518,8 +660,8 @@
     }
     
     #pfpCanvas {
-        width: 240px !important;
-        height: 240px !important;
+        width: min(240px, 85vw) !important;
+        height: min(240px, 85vw) !important;
         max-width: 240px !important;
         max-height: 240px !important;
     }
@@ -533,12 +675,45 @@
     
     .canvas-container,
     .game-canvas-container {
-        max-width: 280px !important;
+        max-width: 100% !important;
     }
     
     .action-buttons,
     .game-controls {
         max-width: 280px !important;
+    }
+    
+    /* Landing page - even smaller on 480px */
+    .floating-actions {
+        padding: 6px 10px !important;
+        bottom: 80px !important;
+        gap: 6px !important;
+    }
+    
+    .floating-social {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .floating-social .social-icon,
+    .floating-social svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+    
+    .floating-token {
+        padding: 5px 10px !important;
+        font-size: 0.65rem !important;
+    }
+    
+    .floating-token .copy-icon {
+        width: 12px !important;
+        height: 12px !important;
+    }
+    
+    .token-address {
+        max-width: 120px !important;
+        font-size: 0.6rem !important;
     }
 }
 
@@ -560,8 +735,8 @@
     }
     
     #pfpCanvas {
-        width: 200px !important;
-        height: 200px !important;
+        width: min(200px, 80vw) !important;
+        height: min(200px, 80vw) !important;
         max-width: 200px !important;
         max-height: 200px !important;
     }
@@ -577,7 +752,7 @@
     .game-canvas-container,
     .action-buttons,
     .game-controls {
-        max-width: 240px !important;
+        max-width: 100% !important;
     }
     
     .menu-grid {
@@ -587,6 +762,39 @@
     .menu-item {
         width: 35px !important;
         height: 35px !important;
+    }
+    
+    /* Landing page - very compact on 360px */
+    .floating-actions {
+        padding: 5px 8px !important;
+        bottom: 70px !important;
+        gap: 5px !important;
+    }
+    
+    .floating-social {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    .floating-social .social-icon,
+    .floating-social svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    
+    .floating-token {
+        padding: 4px 8px !important;
+        font-size: 0.6rem !important;
+    }
+    
+    .floating-token .copy-icon {
+        width: 10px !important;
+        height: 10px !important;
+    }
+    
+    .token-address {
+        max-width: 100px !important;
+        font-size: 0.55rem !important;
     }
 }
 
