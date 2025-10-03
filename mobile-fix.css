@@ -426,37 +426,38 @@
     /* ===== FIX LANDING PAGE FLOATING ACTIONS ===== */
     .floating-actions {
         flex-direction: row !important;
-        flex-wrap: wrap !important;
-        gap: var(--spacing-xs) !important;
-        padding: 8px 12px !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        padding: 10px 16px !important;
         bottom: 100px !important;
         max-width: 95vw !important;
+        width: auto !important;
         justify-content: center !important;
         align-items: center !important;
     }
     
     .floating-social {
-        width: 36px !important;
-        height: 36px !important;
+        width: 38px !important;
+        height: 38px !important;
         flex-shrink: 0 !important;
     }
     
     .floating-social .social-icon {
-        width: 18px !important;
-        height: 18px !important;
+        width: 19px !important;
+        height: 19px !important;
     }
     
     .floating-social svg {
-        width: 18px !important;
-        height: 18px !important;
+        width: 19px !important;
+        height: 19px !important;
     }
     
     .floating-token {
-        padding: 6px 12px !important;
-        font-size: 0.7rem !important;
-        max-width: 100% !important;
-        flex: 1 1 auto !important;
+        padding: 8px 14px !important;
+        font-size: 0.75rem !important;
+        flex-shrink: 1 !important;
         min-width: 0 !important;
+        white-space: nowrap !important;
     }
     
     .floating-token .copy-icon {
@@ -466,8 +467,8 @@
     }
     
     .token-address {
-        max-width: 140px !important;
-        font-size: 0.65rem !important;
+        max-width: 160px !important;
+        font-size: 0.7rem !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
         white-space: nowrap !important;
@@ -603,30 +604,31 @@
 
 /* ===== MEDIUM MOBILE (640px and below) - Override mmga-redesign.css ===== */
 @media (max-width: 640px) {
-    /* More aggressive landing page fixes */
+    /* Keep landing page in one line with glassmorphic background */
     .floating-actions {
         flex-direction: row !important;
-        flex-wrap: wrap !important;
+        flex-wrap: nowrap !important;
         gap: 8px !important;
-        padding: 8px 12px !important;
+        padding: 8px 14px !important;
         bottom: 90px !important;
-        max-width: 92vw !important;
+        max-width: 95vw !important;
+        width: auto !important;
     }
     
     .floating-social {
-        width: 34px !important;
-        height: 34px !important;
+        width: 36px !important;
+        height: 36px !important;
     }
     
     .floating-social .social-icon,
     .floating-social svg {
-        width: 17px !important;
-        height: 17px !important;
+        width: 18px !important;
+        height: 18px !important;
     }
     
     .floating-token {
-        padding: 6px 12px !important;
-        font-size: 0.68rem !important;
+        padding: 7px 12px !important;
+        font-size: 0.72rem !important;
     }
     
     .floating-token .copy-icon {
@@ -635,8 +637,8 @@
     }
     
     .token-address {
-        max-width: 130px !important;
-        font-size: 0.62rem !important;
+        max-width: 150px !important;
+        font-size: 0.68rem !important;
     }
 }
 
@@ -683,27 +685,29 @@
         max-width: 280px !important;
     }
     
-    /* Landing page - even smaller on 480px */
+    /* Landing page - keep in one line on 480px */
     .floating-actions {
-        padding: 6px 10px !important;
+        padding: 7px 12px !important;
         bottom: 80px !important;
-        gap: 6px !important;
+        gap: 7px !important;
+        flex-wrap: nowrap !important;
+        max-width: 95vw !important;
     }
     
     .floating-social {
-        width: 32px !important;
-        height: 32px !important;
+        width: 34px !important;
+        height: 34px !important;
     }
     
     .floating-social .social-icon,
     .floating-social svg {
-        width: 16px !important;
-        height: 16px !important;
+        width: 17px !important;
+        height: 17px !important;
     }
     
     .floating-token {
-        padding: 5px 10px !important;
-        font-size: 0.65rem !important;
+        padding: 6px 10px !important;
+        font-size: 0.68rem !important;
     }
     
     .floating-token .copy-icon {
@@ -712,8 +716,8 @@
     }
     
     .token-address {
-        max-width: 120px !important;
-        font-size: 0.6rem !important;
+        max-width: 130px !important;
+        font-size: 0.64rem !important;
     }
 }
 
@@ -764,37 +768,39 @@
         height: 35px !important;
     }
     
-    /* Landing page - very compact on 360px */
+    /* Landing page - compact single line on 360px */
     .floating-actions {
-        padding: 5px 8px !important;
+        padding: 6px 10px !important;
         bottom: 70px !important;
-        gap: 5px !important;
+        gap: 6px !important;
+        flex-wrap: nowrap !important;
+        max-width: 95vw !important;
     }
     
     .floating-social {
-        width: 30px !important;
-        height: 30px !important;
+        width: 32px !important;
+        height: 32px !important;
     }
     
     .floating-social .social-icon,
     .floating-social svg {
-        width: 14px !important;
-        height: 14px !important;
+        width: 15px !important;
+        height: 15px !important;
     }
     
     .floating-token {
-        padding: 4px 8px !important;
-        font-size: 0.6rem !important;
+        padding: 5px 8px !important;
+        font-size: 0.62rem !important;
     }
     
     .floating-token .copy-icon {
-        width: 10px !important;
-        height: 10px !important;
+        width: 11px !important;
+        height: 11px !important;
     }
     
     .token-address {
-        max-width: 100px !important;
-        font-size: 0.55rem !important;
+        max-width: 110px !important;
+        font-size: 0.58rem !important;
     }
 }
 
