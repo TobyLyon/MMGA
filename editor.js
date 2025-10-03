@@ -2,7 +2,7 @@
   PFP Generator - Web2-only Editor
   - Fabric.js 2D canvas editor for uploading a photo, adding stickers, transforming, and exporting.
   - Features: drag/scale/rotate, flip H/V, layer up/down, delete, opacity, blend mode, snap-to-center, nudge keys, zoom/pan, undo/redo, presets export, JPG/WebP quality, center-crop option.
-  - State: client-side only; session save/load via localStorage.
+  - State: client-side only.
 */
 (function () {
 	'use strict';
@@ -28,7 +28,6 @@
 	// Elements
 	const photoInput = document.getElementById('photoInput');
 	const newProjectBtn = document.getElementById('newProjectBtn');
-	const saveSessionBtn = document.getElementById('saveSessionBtn');
 	const resetBtn = document.getElementById('resetBtn');
 	const fitBtn = document.getElementById('fitBtn');
 	const oneToOneBtn = document.getElementById('oneToOneBtn');
@@ -93,7 +92,9 @@
 			backgroundVpt: true,
 			fireRightClick: false,
 			stopContextMenu: true,
-			uniformScaling: false
+			uniformScaling: false,
+			enableRetinaScaling: true,
+			imageSmoothingEnabled: true
 		});
 		// Configure uniform scaling with Shift
 		fabric.Object.prototype.transparentCorners = false;
@@ -102,7 +103,7 @@
 		fabric.Object.prototype.borderColor = '#87CEEB';
 		fabric.Object.prototype.cornerSize = 10;
 		fabric.Object.prototype.padding = 5;
-		fabric.Object.prototype.objectCaching = true;
+		fabric.Object.prototype.objectCaching = false;
 		fabric.Object.prototype.snapAngle = 1;
 		fabric.Object.prototype.controls.mtr.withConnection = true;
 		// Enable proportional scaling with Shift
@@ -267,7 +268,7 @@
 			const fabricImg = new fabric.Image(img, {
 				selectable: false,
 				evented: false,
-				objectCaching: true
+				objectCaching: false
 			});
 			// Scale background to fit canvas (contain) without deformation
 			const canvasW = fabricCanvas.getWidth();
@@ -379,7 +380,7 @@
 				originX: 'center',
 				originY: 'center',
 				selectable: true,
-				objectCaching: true,
+				objectCaching: false,
 				globalCompositeOperation: 'source-over'
 			});
 			const defaultScale = item.defaultScale || 0.25;
@@ -566,12 +567,12 @@
 					<span>Size</span>
 					<select id="exportSize" class="btn btn-secondary">
 						<option value="original">Original (${originalImageNaturalWidth}×${originalImageNaturalHeight})</option>
-						<option value="512">512×512</option>
-						<option value="1024">1024×1024</option>
-						<option value="1500">1500×1500</option>
-						<option value="1080">1080×1080 (IG)</option>
-						<option value="400">400×400 (X/Twitter)</option>
-						<option value="128">128×128 (Discord)</option>
+						<option value="512">512px</option>
+						<option value="1024">1024px</option>
+						<option value="1500">1500px</option>
+						<option value="1080">1080px (IG)</option>
+						<option value="400">400px (X/Twitter)</option>
+						<option value="128">128px (Discord)</option>
 					</select>
 				</label>
 				<label style="display:flex; gap:8px; align-items:center; justify-content:space-between;">
@@ -584,7 +585,7 @@
 				</label>
 				<div id="qualityRow" style="display:flex; gap:8px; align-items:center; justify-content:space-between;">
 					<span>Quality</span>
-					<input type="range" id="exportQuality" min="0" max="1" step="0.01" value="0.6" style="width:160px;" />
+					<input type="range" id="exportQuality" min="0" max="1" step="0.01" value="0.95" style="width:160px;" />
 				</div>
 				<label style="display:flex; gap:8px; align-items:center;">
 					<input type="checkbox" id="exportCenterCrop" />
@@ -611,7 +612,7 @@
 			const sizeSel = card.querySelector('#exportSize').value;
 			const fmt = formatSel.value;
 			const cropSquare = card.querySelector('#exportCenterCrop').checked;
-			const quality = parseFloat(qualityInput.value || '0.6');
+			const quality = parseFloat(qualityInput.value || '0.95');
 			try {
 				const { blob, width, height, ext } = await exportImage({ sizeSel, fmt, cropSquare, quality });
 				const a = document.createElement('a');
@@ -636,17 +637,48 @@
 		if (sizeSel === 'original') {
 			outW = originalImageNaturalWidth;
 			outH = originalImageNaturalHeight;
+			// If center-crop is enabled with original size, make output square based on smallest dimension
+			if (cropSquare) {
+				const size = Math.max(outW, outH);
+				outW = size;
+				outH = size;
+			}
 		} else {
 			const s = parseInt(sizeSel, 10);
-			outW = s;
-			outH = s;
+			if (cropSquare) {
+				// Square output when center-crop is enabled
+				outW = s;
+				outH = s;
+			} else {
+				// Maintain aspect ratio when center-crop is disabled
+				const aspect = originalImageNaturalWidth / originalImageNaturalHeight;
+				if (aspect >= 1) {
+					// Landscape or square
+					outW = s;
+					outH = Math.round(s / aspect);
+				} else {
+					// Portrait
+					outH = s;
+					outW = Math.round(s * aspect);
+				}
+			}
 		}
 
 		// Prepare an offscreen Fabric StaticCanvas for crisp output
-		const staticCanvas = new fabric.StaticCanvas(null, { width: outW, height: outH, enableRetinaScaling: false });
+		const staticCanvas = new fabric.StaticCanvas(null, { 
+			width: outW, 
+			height: outH, 
+			enableRetinaScaling: false,
+			imageSmoothingEnabled: true
+		});
 
-		// Background photo: scale to cover (if cropSquare) or contain
-		const bgImage = new fabric.Image(originalImage, { selectable: false, evented: false });
+		// Background photo: scale to fill the export canvas exactly as shown in preview
+		const bgImage = new fabric.Image(originalImage, { 
+			selectable: false, 
+			evented: false,
+			objectCaching: false
+		});
+		// Use cover scaling if center-crop is enabled, otherwise contain to match preview
 		const cover = !!cropSquare;
 		const scale = cover
 			? Math.max(outW / originalImageNaturalWidth, outH / originalImageNaturalHeight)
@@ -706,54 +738,6 @@
 		return { blob, width: outW, height: outH, ext: 'png' };
 	}
 
-	/** Session **/
-	function saveSession() {
-		if (!originalImage) {
-			showNotification('No session to save', 'error');
-			return;
-		}
-		try {
-			const json = fabricCanvas.toDatalessJSON(['data', 'globalCompositeOperation']);
-			// Snapshot original image as data URL (may be large)
-			const tmp = document.createElement('canvas');
-			tmp.width = originalImageNaturalWidth;
-			tmp.height = originalImageNaturalHeight;
-			const tctx = tmp.getContext('2d');
-			tctx.drawImage(originalImage, 0, 0);
-			const originalDataURL = tmp.toDataURL('image/png');
-			const session = {
-				originalImage: originalDataURL,
-				originalImageNaturalWidth,
-				originalImageNaturalHeight,
-				fabric: json
-			};
-			localStorage.setItem('pfp_session', JSON.stringify(session));
-			showNotification('Session saved', 'success');
-		} catch (e) {
-			console.error(e);
-			showNotification('Failed to save session', 'error');
-		}
-	}
-
-	async function loadSessionIfAny() {
-		try {
-			const raw = localStorage.getItem('pfp_session');
-			if (!raw) return;
-			const session = JSON.parse(raw);
-			const img = new Image();
-			img.onload = async () => {
-				originalImage = img;
-				originalImageNaturalWidth = session.originalImageNaturalWidth;
-				originalImageNaturalHeight = session.originalImageNaturalHeight;
-				setCanvasSizeToPhotoPreview();
-				await setFabricBackground(img);
-				fabricCanvas.loadFromJSON(session.fabric, () => fabricCanvas.requestRenderAll());
-				showNotification('Session loaded');
-			};
-			img.src = session.originalImage;
-		} catch {}
-	}
-
 	function resetProject() {
 		if (!fabricCanvas) return;
 		fabricCanvas.clear();
@@ -803,17 +787,19 @@
 		copyTokenBtn?.addEventListener('click', copyTokenAddress);
 		floatingTokenBtn?.addEventListener('click', copyTokenAddress);
 
+		// Upload photo button triggers hidden file input
+		const uploadPhotoBtn = document.getElementById('uploadPhotoBtn');
+		uploadPhotoBtn?.addEventListener('click', () => {
+			photoInput?.click();
+		});
+
 		photoInput?.addEventListener('change', async (e) => {
 			const file = e.target.files && e.target.files[0];
 			if (!file) return;
 			await setBackgroundFromFile(file);
 			e.target.value = '';
 		});
-		newProjectBtn?.addEventListener('click', () => {
-			resetProject();
-			localStorage.removeItem('pfp_session');
-		});
-		saveSessionBtn?.addEventListener('click', saveSession);
+		newProjectBtn?.addEventListener('click', resetProject);
 		resetBtn?.addEventListener('click', resetProject);
 		fitBtn?.addEventListener('click', fitToView);
 		oneToOneBtn?.addEventListener('click', setOneToOne);
@@ -846,7 +832,6 @@
 		initFabricCanvas();
 		wireUI();
 		await loadStickerPacks();
-		await loadSessionIfAny();
 		initHatRain();
 	});
 
@@ -874,8 +859,9 @@
 		const duration = 8 + Math.random() * 12; // 8-20 seconds
 		hat.style.animationDuration = duration + 's';
 		
-		// Random delay to stagger the hats
-		const delay = Math.random() * 10;
+		// Spread delays across a full animation cycle to avoid clustering
+		// Use negative delays to start some hats already mid-fall
+		const delay = (Math.random() * duration) - duration;
 		hat.style.animationDelay = delay + 's';
 		
 		// Random size variation
