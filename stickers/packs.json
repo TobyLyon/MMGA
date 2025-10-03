@@ -12,6 +12,20 @@
           "allowTint": false 
         },
         { 
+          "id": "Hat 2", 
+          "src": "stickers/hat.png", 
+          "thumb": "stickers/hat.png", 
+          "defaultScale": 0.35, 
+          "allowTint": false 
+        },
+        { 
+          "id": "American Flag", 
+          "src": "stickers/american flag.png", 
+          "thumb": "stickers/american flag.png", 
+          "defaultScale": 0.4, 
+          "allowTint": false 
+        },
+        { 
           "id": "Text 1", 
           "src": "img/branding/mmga-text-1.png", 
           "thumb": "img/branding/mmga-text-1.png", 
@@ -22,6 +36,20 @@
           "id": "Text 2", 
           "src": "img/branding/mmga-text-2.png", 
           "thumb": "img/branding/mmga-text-2.png", 
+          "defaultScale": 0.5, 
+          "allowTint": false 
+        },
+        { 
+          "id": "MMGA Text 1", 
+          "src": "stickers/MMGA text 1.png", 
+          "thumb": "stickers/MMGA text 1.png", 
+          "defaultScale": 0.5, 
+          "allowTint": false 
+        },
+        { 
+          "id": "MMGA Text 2", 
+          "src": "stickers/MMGA text 2.png", 
+          "thumb": "stickers/MMGA text 2.png", 
           "defaultScale": 0.5, 
           "allowTint": false 
         }
