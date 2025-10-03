@@ -274,6 +274,22 @@
         box-sizing: border-box !important;
     }
     
+    /* ===== HIDE HEADER NAV ON MOBILE ===== */
+    /* Hide the duplicate socials/token button in header since they're in floating actions */
+    .main-header .header-nav {
+        display: none !important;
+    }
+    
+    /* Make header simpler on mobile - just logo and title */
+    .main-header .header-container {
+        justify-content: center !important;
+        padding: var(--spacing-sm) var(--spacing-md) !important;
+    }
+    
+    .main-header .logo-section {
+        justify-content: center !important;
+    }
+    
     /* ===== FIX TAB NAVIGATION ===== */
     .tab-navigation {
         width: calc(100% - var(--space-md)) !important;
