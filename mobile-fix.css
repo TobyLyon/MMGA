@@ -429,7 +429,7 @@
         flex-wrap: nowrap !important;
         gap: 10px !important;
         padding: 10px 16px !important;
-        bottom: 100px !important;
+        bottom: 150px !important;
         max-width: 95vw !important;
         width: auto !important;
         justify-content: center !important;
@@ -610,7 +610,7 @@
         flex-wrap: nowrap !important;
         gap: 8px !important;
         padding: 8px 14px !important;
-        bottom: 90px !important;
+        bottom: 150px !important;
         max-width: 95vw !important;
         width: auto !important;
     }
@@ -688,7 +688,7 @@
     /* Landing page - keep in one line on 480px */
     .floating-actions {
         padding: 7px 12px !important;
-        bottom: 80px !important;
+        bottom: 150px !important;
         gap: 7px !important;
         flex-wrap: nowrap !important;
         max-width: 95vw !important;
@@ -771,7 +771,7 @@
     /* Landing page - compact single line on 360px */
     .floating-actions {
         padding: 6px 10px !important;
-        bottom: 70px !important;
+        bottom: 150px !important;
         gap: 6px !important;
         flex-wrap: nowrap !important;
         max-width: 95vw !important;
